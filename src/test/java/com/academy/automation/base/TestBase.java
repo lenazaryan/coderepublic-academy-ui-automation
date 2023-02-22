@@ -17,5 +17,6 @@ public class TestBase {
     public void closeBrowser() {
         closeDrivers();
         System.out.println("after method");
+        System.out.println();
     }
 }
