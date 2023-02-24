@@ -1,7 +1,6 @@
 package com.academy.automation.base;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 
 import static com.academy.automation.configuration.DriverBase.*;
 
@@ -9,7 +8,7 @@ public class TestBase {
     @BeforeMethod
     public void setUp() {
         initDriverObject();
-        getDriver().get("https://rahulshettyacademy.com/AutomationPractice/");
+        getDriver().get("https://academy-stream.coderepublic.am/");
         System.out.println("before method");
     }
 
