@@ -27,7 +27,7 @@ public class PageTest extends TestBase {
         new SignInPage()
                 .open()
                 .login(email, pass);
-        Thread.sleep(5000L);
+        Thread.sleep(3000L);
         boolean userIconIsDisplayed = new StreamPage().userIconIsDisplayed();
         Assert.assertFalse(userIconIsDisplayed, "User Icon Should Not Be Displayed But It Is");
     }
@@ -37,7 +37,7 @@ public class PageTest extends TestBase {
         StreamPage streamPage = new SignInPage()
                 .open()
                 .login("vardan.l.grigoryan@gmail.com", "academy2023");
-        Thread.sleep(4000L);
+        Thread.sleep(3000L);
         String resultUrl = streamPage.getUrl();
         Assert.assertTrue(resultUrl.contains("https://academy-stream.coderepublic.am"), "Incorrect URL");
     }
@@ -58,16 +58,20 @@ public class PageTest extends TestBase {
         loginSuccessfulTest();
         boolean isClicked = new StreamPage().init().headerSearchFieldIsClicked();
         Thread.sleep(3000L);
-        Assert.assertTrue(isClicked, "SearchField is Not Clicked");
+        String value = new StreamPage().init().getCssValueOfSearchField("color");
+        String value2 = new StreamPage().init().getCssValueOfSearchField("background-color");
+//        System.out.println("color: " + value + "\nbackground-color: " + value2);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(isClicked, "SearchField is Not Clicked");
+        softAssert.assertEquals(value, "rgba(0, 0, 0, 0.85)", "Incorrect search field color");
+        softAssert.assertEquals(value2, "rgba(255, 255, 255, 1)", "Incorrect search field Background-color");
+        softAssert.assertAll();
     }
 
     @Test
     public void headerSearchIsHoveredTest()throws InterruptedException{
         new StreamPage().open().hoverHeaderSearchField();
-        String value = new StreamPage().init().getCssValueOfSearchField("background-color");
-        System.out.println(value);
-        Thread.sleep(4000L);
-
+        Thread.sleep(3000L);
     }
 
 }

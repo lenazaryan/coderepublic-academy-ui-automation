@@ -52,8 +52,7 @@ public abstract class PageBase<T> {
     }
 
     protected void hover(WebElement element){
-        Actions actions = new Actions(DriverBase.getDriver());
-        actions.moveToElement(element).build().perform();
+        new Actions(DriverBase.getDriver()).moveToElement(element).build().perform();
     }
 
     protected void navigateBack(){

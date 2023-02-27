@@ -33,7 +33,6 @@ public class StreamPage extends PageBase<StreamPage>{
         hover(headerSearchField);
     }
     public String getCssValueOfSearchField(String value){
-        System.out.println(headerSearchField.getAttribute("background-color"));
         return headerSearchField.getCssValue(value);
     }
     public boolean headerSearchFieldIsClicked(){
