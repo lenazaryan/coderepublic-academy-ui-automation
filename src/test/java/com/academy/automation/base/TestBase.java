@@ -8,7 +8,6 @@ public class TestBase {
     @BeforeMethod
     public void setUp() {
         initDriverObject();
-        getDriver().get("https://academy-stream.coderepublic.am/");
         System.out.println("before method");
     }
 

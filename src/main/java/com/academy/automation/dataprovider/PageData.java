@@ -7,10 +7,9 @@ public class PageData {
     public Object[][] testData(){
         return new Object[][]{
                 {"", ""},
+                {"test@gmail.com", "test"},
                 {"test@gmail.com", "academy2023"},
-                {"test", "academy2023"},
                 {"vardan.l.grigoryan@gmail.com", "test"},
-                {"vardan.l.grigoryan@gmail.com", "academy2023"}
         };
     }
 }

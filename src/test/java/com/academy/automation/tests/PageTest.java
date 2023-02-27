@@ -1,33 +1,73 @@
 package com.academy.automation.tests;
 
 import com.academy.automation.base.TestBase;
-import com.academy.automation.configuration.DriverBase;
 import com.academy.automation.dataprovider.PageData;
 import com.academy.automation.pageobjects.HomePage;
 import com.academy.automation.pageobjects.SignInPage;
 import com.academy.automation.pageobjects.StreamPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class PageTest extends TestBase {
 
     @Test
     public void clickSignInButtonTest() {
-        new HomePage().clickSignInButton();
-        String actualUrl = DriverBase.getDriver().getCurrentUrl();
-        Assert.assertEquals(actualUrl, "https://academy-stream.coderepublic.am/login", "Incorrect URL");
+        String actualUrl = new HomePage()
+                .open()
+                .clickSignInButton()
+                .getUrl();
+        Assert.assertEquals(actualUrl, "https://academy-stream.coderepublic.am/login", "Incorrect URL Path");
 
     }
 
     @Test(dataProvider = "login-set", dataProviderClass = PageData.class)
-    public void loginTest(String email, String pass) throws InterruptedException {
+    public void loginInvalidCredentialsTest(String email, String pass) throws InterruptedException {
         clickSignInButtonTest();
-        new SignInPage().login(email, pass);
-        Thread.sleep(3000L);
-        boolean isDisplayed = new StreamPage().userIconIsDisplayed();
-        Assert.assertTrue(isDisplayed, "Fail");
+        new SignInPage()
+                .open()
+                .login(email, pass);
+        Thread.sleep(5000L);
+        boolean userIconIsDisplayed = new StreamPage().userIconIsDisplayed();
+        Assert.assertFalse(userIconIsDisplayed, "User Icon Should Not Be Displayed But It Is");
     }
 
+    @Test
+    public void loginSuccessfulTest() throws InterruptedException {
+        StreamPage streamPage = new SignInPage()
+                .open()
+                .login("vardan.l.grigoryan@gmail.com", "academy2023");
+        Thread.sleep(4000L);
+        String resultUrl = streamPage.getUrl();
+        Assert.assertTrue(resultUrl.contains("https://academy-stream.coderepublic.am"), "Incorrect URL");
+    }
 
+    @Test
+    public void redirectBackFromPathsToHomeTest() throws InterruptedException {
+        String result = new HomePage()
+                .open()
+                .clickPathsButton()
+                .clickBack()
+                .getUrl();
+        Thread.sleep(3000L);
+        Assert.assertEquals(result, "https://academy-stream.coderepublic.am/", "Incorrect URL"); // Test should fail. Bug: doesn't redirect back to HomePage
+    }
+
+    @Test
+    public void headerSearchIsClickedTest()throws InterruptedException{
+        loginSuccessfulTest();
+        boolean isClicked = new StreamPage().init().headerSearchFieldIsClicked();
+        Thread.sleep(3000L);
+        Assert.assertTrue(isClicked, "SearchField is Not Clicked");
+    }
+
+    @Test
+    public void headerSearchIsHoveredTest()throws InterruptedException{
+        new StreamPage().open().hoverHeaderSearchField();
+        String value = new StreamPage().init().getCssValueOfSearchField("background-color");
+        System.out.println(value);
+        Thread.sleep(4000L);
+
+    }
 
 }
