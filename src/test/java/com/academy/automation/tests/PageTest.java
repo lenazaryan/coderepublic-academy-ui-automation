@@ -70,7 +70,8 @@ public class PageTest extends TestBase {
 
     @Test
     public void headerSearchIsHoveredTest()throws InterruptedException{
-        new StreamPage().open().hoverHeaderSearchField();
+        loginSuccessfulTest();
+        new StreamPage().init().hoverHeaderSearchField();
         Thread.sleep(3000L);
     }
 

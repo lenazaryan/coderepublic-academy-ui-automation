@@ -1,8 +1,7 @@
 package com.academy.automation.pageobjects;
-
+import com.academy.automation.utils.Actions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 
 public class SignInPage extends PageBase<SignInPage> {
     static String PAGE_PATH = "/login";
@@ -25,12 +24,12 @@ public class SignInPage extends PageBase<SignInPage> {
     }
 
     public HomePage clickBack(){
-        navigateBack();
+        Actions.navigateBack();
         return new HomePage();
     }
 
     public String getUrl(){
-        return getPageUrl();
+        return Actions.getPageUrl();
     }
 
     @Override

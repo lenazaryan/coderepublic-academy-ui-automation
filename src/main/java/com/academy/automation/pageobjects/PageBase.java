@@ -51,17 +51,5 @@ public abstract class PageBase<T> {
         type(elements.get(position), text);
     }
 
-    protected void hover(WebElement element){
-        new Actions(DriverBase.getDriver()).moveToElement(element).build().perform();
-    }
-
-    protected void navigateBack(){
-        DriverBase.getDriver().navigate().back();
-    }
-
-    protected String getPageUrl(){
-        return DriverBase.getDriver().getCurrentUrl();
-    }
-
 
 }

@@ -1,11 +1,10 @@
 package com.academy.automation.pageobjects;
 
+import com.academy.automation.utils.Actions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends PageBase<HomePage> {
-
-    static String PAGE_PATH = "";
     @FindBy(css = ".btn-text-secondary ")
     private WebElement signInBtn;
 
@@ -26,7 +25,7 @@ public class HomePage extends PageBase<HomePage> {
     }
 
     public String getUrl(){
-        return getPageUrl();
+        return Actions.getPageUrl();
     }
 
     @Override
@@ -42,10 +41,11 @@ public class HomePage extends PageBase<HomePage> {
 
     @Override
     public String getUrlPath() {
-        return PAGE_PATH;
+        return null;
     }
 
-    public void clockOnHomeButton() {
+    public HomePage clockOnHomeButton() {
         clickOn(homeBtn);
+        return this;
     }
 }
