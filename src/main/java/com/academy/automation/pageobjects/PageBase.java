@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
+import static com.academy.automation.configuration.DriverBase.getDriver;
+
 public abstract class PageBase<T> {
     static String BASE_URL = "https://academy-stream.coderepublic.am";
 
@@ -23,7 +25,7 @@ public abstract class PageBase<T> {
 //            url = BASE_URL + getUrlPath();
 //        }
         String url = !(getUrlPath()==null)? BASE_URL+getUrlPath(): BASE_URL;
-        DriverBase.getDriver().get(url);
+        getDriver().get(url);
     }
     protected T openPage(){
         load();
@@ -31,7 +33,7 @@ public abstract class PageBase<T> {
         return (T)this;
     }
     protected T initPage(){
-        PageFactory.initElements(DriverBase.getDriver(), this);
+        PageFactory.initElements(getDriver(), this);
         return (T)this;
     }
 

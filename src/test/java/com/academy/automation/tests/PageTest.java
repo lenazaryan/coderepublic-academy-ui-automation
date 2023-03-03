@@ -69,10 +69,13 @@ public class PageTest extends TestBase {
     }
 
     @Test
-    public void headerSearchIsHoveredTest()throws InterruptedException{
+    public void headerSearchIsHoveredColorTest()throws InterruptedException{
         loginSuccessfulTest();
-        new StreamPage().init().hoverHeaderSearchField();
         Thread.sleep(3000L);
+        Assert.assertEquals(new StreamPage()
+                .init().hoverHeaderSearchField()
+                .getCssValueOfSearchField("color"),
+                "rgba(0, 0, 0, 0.85)", "Wrong color");
     }
 
 }
