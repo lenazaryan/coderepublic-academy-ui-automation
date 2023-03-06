@@ -2,6 +2,7 @@ package com.academy.automation.pageobjects;
 
 import com.academy.automation.configuration.DriverBase;
 import com.academy.automation.configuration.DriverConfig;
+import com.academy.automation.helper.Waiter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
@@ -14,44 +15,58 @@ public abstract class PageBase<T> {
     static String BASE_URL = "https://academy-stream.coderepublic.am";
 
     abstract T open();
+
     abstract T init();
+
     abstract String getUrlPath();
 
-    protected void load(){
+    protected void load() {
 //        variable = condition ? value_if_condition_true : value_if_condition_false;
-//        if(getUrlPath()==null){
-//            url = BASE_URL;
-//        }else {
-//            url = BASE_URL + getUrlPath();
-//        }
-        String url = !(getUrlPath()==null)? BASE_URL+getUrlPath(): BASE_URL;
+        String url = !(getUrlPath() == null) ? BASE_URL + getUrlPath() : BASE_URL;
         getDriver().get(url);
     }
-    protected T openPage(){
+
+    protected T openPage() {
         load();
         initPage();
-        return (T)this;
-    }
-    protected T initPage(){
-        PageFactory.initElements(getDriver(), this);
-        return (T)this;
+        return (T) this;
     }
 
-    protected void clickOn(WebElement element){
+    protected T initPage() {
+        PageFactory.initElements(getDriver(), this);
+        return (T) this;
+    }
+
+    protected void clickOn(WebElement element) {
+//        Waiter.getWait().waitUntilElementToBeClickable(element);
         element.click();
     }
 
-    protected void clickOn(List<WebElement> elements, int position){
+    protected void clickOn(List<WebElement> elements, int position) {
+        Waiter.getWait().waitUntilElementToBeClickable(elements.get(position));
         clickOn(elements.get(position));
     }
 
-    protected void type(WebElement element, String text){
+    protected void type(WebElement element, String text) {
         element.sendKeys(text);
     }
 
-    protected void type(List<WebElement> elements, int position, String text){
+    protected void type(List<WebElement> elements, int position, String text) {
         type(elements.get(position), text);
     }
 
+    protected void hover(WebElement element) {
+        Actions actions = new Actions(getDriver());
+        actions.moveToElement(element).perform();
+    }
+
+    protected void navigateBack() {
+        getDriver().navigate().back();
+    }
+
+    protected String getPageUrl() {
+        Waiter.getWait().sleep(3000);
+        return getDriver().getCurrentUrl();
+    }
 
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="With Login Tests">
+    <test name="Test1">
+        <classes>
+            <class name="com.academy.automation.tests.HomePageTests">
+                <methods>
+                    <include name=".*enabledTestMethod.*"/>
+                    <exclude name=".*brokenTestMethod.*"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

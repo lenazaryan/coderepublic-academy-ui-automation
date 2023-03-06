@@ -1,6 +1,5 @@
 package com.academy.automation.pageobjects;
 
-import com.academy.automation.utils.Actions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -8,30 +7,15 @@ public class HomePage extends PageBase<HomePage> {
     @FindBy(css = ".btn-text-secondary ")
     private WebElement signInBtn;
 
-    @FindBy(xpath = "//a[normalize-space()='HOME']")
+    @FindBy(css = ".nav-item:nth-child(1)")
     private WebElement homeBtn;
 
-    @FindBy(xpath = "//a[normalize-space()='PATHS']")
+    @FindBy(css = ".nav-item:nth-child(2)")
     private WebElement pathsBtn;
-
-    public SignInPage clickSignInButton() {
-        clickOn(signInBtn);
-        return new SignInPage();
-    }
-
-    public SignInPage clickPathsButton(){
-        clickOn(pathsBtn);
-        return new SignInPage();
-    }
-
-    public String getUrl(){
-        return Actions.getPageUrl();
-    }
 
     @Override
     public HomePage open() {
         return openPage();
-
     }
 
     @Override
@@ -48,4 +32,19 @@ public class HomePage extends PageBase<HomePage> {
         clickOn(homeBtn);
         return this;
     }
+
+    public SignInPage clickSignInButton() {
+        clickOn(signInBtn);
+        return new SignInPage();
+    }
+
+    public SignInPage clickPathsButton() {
+        clickOn(pathsBtn);
+        return new SignInPage();
+    }
+
+    public String getUrl() {
+        return getPageUrl();
+    }
+
 }

@@ -1,11 +1,10 @@
 package com.academy.automation.pageobjects;
-
-import com.academy.automation.utils.Actions;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class StreamPage extends PageBase<StreamPage>{
+import java.sql.Struct;
+
+public class StreamPage extends PageBase<StreamPage> {
 
     @FindBy(xpath = "//div[@class='firstChild']//div[@class='main-playlists']")
     private WebElement playlists;
@@ -37,33 +36,34 @@ public class StreamPage extends PageBase<StreamPage>{
         return null;
     }
 
-    public boolean userIconIsDisplayed(){
+    public boolean userIconIsDisplayed() {
         return userIcon.isDisplayed();
     }
 
-    public String getUrl(){return Actions.getPageUrl();}
+    public String getUrl() {
+        return getPageUrl();
+    }
 
-    public StreamPage hoverHeaderSearchField(){
-        Actions.hover(headerSearchField);
+    public StreamPage hoverHeaderSearchField() {
+        hover(headerSearchField);
         return this;
     }
-    public String getCssValueOfSearchField(String value){
-        return headerSearchField.getCssValue(value);
+
+    public StreamPage clickHeaderSearchField() {
+        clickOn(headerSearchField);
+        return this;
     }
-    public boolean headerSearchFieldIsClicked(){
-        try{
-            clickOn(headerSearchField);
-        }catch(StaleElementReferenceException e){
-            return false;
-        }
-        return true;
-    }
+
     public StreamPage typeInSearchField(String text){
         type(headerSearchField, text);
         return this;
     }
 
-    public StreamPage clickHeaderSearchSubmitButton(){
+    public String getValueOfSearchField(){
+        return headerSearchField.getAttribute("value");
+    }
+
+    public StreamPage clickHeaderSearchSubmitButton() {
         clickOn(headerSearchSubmitBtn);
         return this;
     }
