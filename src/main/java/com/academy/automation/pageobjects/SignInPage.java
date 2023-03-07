@@ -5,7 +5,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class SignInPage extends PageBase<SignInPage> {
     static String PAGE_PATH = "/login";
-
     @FindBy(css = "#email")
     private WebElement emailField;
 
@@ -14,6 +13,9 @@ public class SignInPage extends PageBase<SignInPage> {
 
     @FindBy(css = ".btn-primary")
     private WebElement submitBtn;
+
+    @FindBy(css = ".forgot")
+    private WebElement forgotPassword;
 
     @Override
     public SignInPage open() {
@@ -35,19 +37,24 @@ public class SignInPage extends PageBase<SignInPage> {
         return this;
     }
 
-    public SignInPage typePassword(String password){
+    public SignInPage typePassword(String password) {
         type(passwordField, password);
         return this;
     }
 
-    public StreamPage clickSubmitButton() {
+    public LoggedInHomePage clickSubmitButton() {
         clickOn(submitBtn);
-        return new StreamPage();
+        return new LoggedInHomePage();
     }
 
     public HomePage clickBack() {
         navigateBack();
         return new HomePage();
+    }
+
+    public ForgotPasswordPage clickForgotPasswordLink(){
+        clickOn(forgotPassword);
+        return new ForgotPasswordPage();
     }
 
     public String getUrl() {

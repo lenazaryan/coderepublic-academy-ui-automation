@@ -1,10 +1,29 @@
 package com.academy.automation.pageobjects;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+public class SearchResultPage extends PageBase<SearchResultPage> {
+    static String PAGE_PATH = "/search";
 
-public class SearchResultPage {
+    @Override
+    public SearchResultPage open() {
+        return openPage();
+    }
 
-    @FindBy(css = ".video-search")
-    private WebElement searchResultContainer;
+    @Override
+    public SearchResultPage init() {
+        return initPage();
+    }
+
+    @Override
+    public String getUrlPath() {
+        return PAGE_PATH;
+    }
+
+    public String getUrl() {
+        return getPageUrl();
+    }
+
+    public SearchResultPage clickBack() {
+        navigateBack();
+        return this;
+    }
 }

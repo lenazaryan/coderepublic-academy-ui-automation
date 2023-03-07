@@ -8,12 +8,10 @@ public class TestBase {
     @BeforeMethod
     public void setUp() {
         initDriverObject();
-        System.out.println("before method");
     }
 
     @AfterMethod
     public void closeBrowser() {
         closeDrivers();
-        System.out.println("after method");
     }
 }

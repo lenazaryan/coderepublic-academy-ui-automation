@@ -1,15 +1,12 @@
 package com.academy.automation.pageobjects;
 
-import com.academy.automation.configuration.DriverBase;
-import com.academy.automation.configuration.DriverConfig;
-import com.academy.automation.helper.Waiter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
-
 import static com.academy.automation.configuration.DriverBase.getDriver;
+import static com.academy.automation.helper.Waiter.getWait;
 
 public abstract class PageBase<T> {
     static String BASE_URL = "https://academy-stream.coderepublic.am";
@@ -38,12 +35,11 @@ public abstract class PageBase<T> {
     }
 
     protected void clickOn(WebElement element) {
-//        Waiter.getWait().waitUntilElementToBeClickable(element);
+        getWait().waitUntilElementToBeClickable(element);
         element.click();
     }
 
     protected void clickOn(List<WebElement> elements, int position) {
-        Waiter.getWait().waitUntilElementToBeClickable(elements.get(position));
         clickOn(elements.get(position));
     }
 
@@ -65,8 +61,13 @@ public abstract class PageBase<T> {
     }
 
     protected String getPageUrl() {
-        Waiter.getWait().sleep(3000);
+        getWait().sleep(3000);
         return getDriver().getCurrentUrl();
+    }
+
+    protected boolean elementIsDisplayed(WebElement element) {
+        getWait().waitUntilElementToBeVisible(element);
+        return element.isDisplayed();
     }
 
 }
