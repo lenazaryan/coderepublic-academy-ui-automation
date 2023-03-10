@@ -3,6 +3,8 @@ package com.academy.automation.pageobjects;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static com.academy.automation.configuration.DriverBase.getDriver;
+
 public class HomePage extends PageBase<HomePage> {
     @FindBy(css = ".btn-text-secondary ")
     private WebElement signInBtn;
@@ -41,6 +43,15 @@ public class HomePage extends PageBase<HomePage> {
     public SignInPage clickPathsButton() {
         clickOn(pathsBtn);
         return new SignInPage();
+    }
+
+    public HomePage reloadHomePage(){
+        reloadPage();
+        return this;
+    }
+
+    public String getTitleOfHomePage(){
+        return getDriver().getTitle();
     }
 
     public String getUrl() {

@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 import static com.academy.automation.configuration.DriverBase.getDriver;
-import static com.academy.automation.helper.Waiter.getWait;
+import static com.academy.automation.helper.Waits.getWait;
 
 public abstract class PageBase<T> {
     static String BASE_URL = "https://academy-stream.coderepublic.am";
@@ -65,9 +65,13 @@ public abstract class PageBase<T> {
         return getDriver().getCurrentUrl();
     }
 
-    protected boolean elementIsDisplayed(WebElement element) {
+    protected boolean isElementDisplayed(WebElement element) {
         getWait().waitUntilElementToBeVisible(element);
         return element.isDisplayed();
+    }
+
+    protected void reloadPage(){
+        getDriver().navigate().refresh();
     }
 
 }

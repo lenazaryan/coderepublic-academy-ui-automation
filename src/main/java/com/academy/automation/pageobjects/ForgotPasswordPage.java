@@ -3,7 +3,7 @@ package com.academy.automation.pageobjects;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.academy.automation.helper.Waiter.getWait;
+import static com.academy.automation.helper.Waits.getWait;
 import static org.testng.Assert.assertNull;
 
 public class ForgotPasswordPage extends PageBase<ForgotPasswordPage> {
@@ -16,8 +16,9 @@ public class ForgotPasswordPage extends PageBase<ForgotPasswordPage> {
     @FindBy(css = ".btn-primary.btn-text-primary")
     private WebElement sendBtn;
 
-    @FindBy(css = ".ant-message-custom-content.ant-message-error")
-    private WebElement errorMessage;
+    @FindBy(css = ".ant-message-notice-content .ant-message-custom-content")
+    //.ant-message-custom-content ant-message-success\.ant-message-custom-content.ant-message-error
+    private WebElement antMessage;
 
     @Override
     public ForgotPasswordPage open() {
@@ -45,17 +46,17 @@ public class ForgotPasswordPage extends PageBase<ForgotPasswordPage> {
     }
 
     public boolean isErrorMessageDisplayed() {
-        getWait().waitUntilElementToBeVisible(errorMessage);
-        return errorMessage.isDisplayed();
+        getWait().waitUntilElementToBeVisible(antMessage);
+        return antMessage.isDisplayed();
     }
 
-    public String getErrorMessageText(){
-        getWait().waitUntilElementToBeVisible(errorMessage);
-        return errorMessage.getText();
+    public String getErrorOrSuccessMessageText() {
+        getWait().waitUntilElementToBeVisible(antMessage);
+        return antMessage.getText();
     }
 
-    public String getValidationMessage(){
-        return  emailField.getAttribute("validationMessage");
+    public String getValidationMessage() {
+        return emailField.getAttribute("validationMessage");
     }
 
     public String getUrl() {

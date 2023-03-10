@@ -3,6 +3,8 @@ package com.academy.automation.pageobjects;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static com.academy.automation.helper.Waits.getWait;
+
 public class SignInPage extends PageBase<SignInPage> {
     static String PAGE_PATH = "/login";
     @FindBy(css = "#email")
@@ -16,6 +18,15 @@ public class SignInPage extends PageBase<SignInPage> {
 
     @FindBy(css = ".forgot")
     private WebElement forgotPassword;
+
+    @FindBy(css = "#email + p.err_message")
+    private WebElement emailErrorMessage;
+
+    @FindBy(css = "#password + p.err_message")
+    private WebElement passwordErrorMessage;
+
+    @FindBy(css = ".err_mess")
+    private WebElement incorrectEmailOrPasswordMessage;
 
     @Override
     public SignInPage open() {
@@ -47,12 +58,40 @@ public class SignInPage extends PageBase<SignInPage> {
         return new LoggedInHomePage();
     }
 
+    public SignInPage clickSignInButton() {
+        clickOn(submitBtn);
+        return this;
+    }
+
+    public boolean isSubmitButtonEnabled() {
+        return submitBtn.isEnabled();
+    }
+
+    public boolean isIncorrectEmailOrPassErrorDisplayed() {
+        return isElementDisplayed(incorrectEmailOrPasswordMessage);
+    }
+
+    public String getTextOfEmailErrorMessage() {
+        getWait().waitUntilElementToBeVisible(emailErrorMessage);
+        return emailErrorMessage.getText();
+    }
+
+    public String getTextOfPasswordErrorMessage() {
+        getWait().waitUntilElementToBeVisible(passwordErrorMessage);
+        return passwordErrorMessage.getText();
+    }
+
+    public String getErrorTextForIncorrectEmailOrPassword(){
+        getWait().waitUntilElementToBeVisible(incorrectEmailOrPasswordMessage);
+        return incorrectEmailOrPasswordMessage.getText();
+    }
+
     public HomePage clickBack() {
         navigateBack();
         return new HomePage();
     }
 
-    public ForgotPasswordPage clickForgotPasswordLink(){
+    public ForgotPasswordPage clickForgotPasswordLink() {
         clickOn(forgotPassword);
         return new ForgotPasswordPage();
     }

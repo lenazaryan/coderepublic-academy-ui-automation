@@ -1,13 +1,10 @@
 package com.academy.automation.configuration;
 
-import org.apache.commons.logging.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-
-import javax.sound.midi.Soundbank;
 
 
 public class DriverConfig {
@@ -20,7 +17,6 @@ public class DriverConfig {
     private static WebDriver createChromeDriver() {
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(false);
-//      WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         return driver;

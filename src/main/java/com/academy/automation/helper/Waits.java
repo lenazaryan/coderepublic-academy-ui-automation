@@ -8,29 +8,29 @@ import static java.time.Duration.*;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
-public class Waiter {
+public class Waits {
     private static int SHORT_WAIT = 2;
     private static int WAIT = 3;
     private static int LONG_WAIT = 6;
     private static WebDriverWait wait;
 
-    private Waiter() {
+    private Waits() {
     }
 
-    public static Waiter getShortWait() {
+    public static Waits getShortWait() {
         return getCustomWait(SHORT_WAIT);
     }
 
-    public static Waiter getWait() {
+    public static Waits getWait() {
         return getCustomWait(WAIT);
     }
 
-    public static Waiter getLongWait() {
+    public static Waits getLongWait() {
         return getCustomWait(LONG_WAIT);
     }
 
-    private static Waiter getCustomWait(int timeout) {
-        Waiter waitHandler = new Waiter();
+    private static Waits getCustomWait(int timeout) {
+        Waits waitHandler = new Waits();
         wait = new WebDriverWait(getDriver(), ofSeconds(timeout), ofMillis(50));
         return waitHandler;
     }
@@ -50,7 +50,6 @@ public class Waiter {
             //exception_handler
         }
     }
-
 
 }
 

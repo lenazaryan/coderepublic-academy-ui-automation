@@ -12,3 +12,25 @@
         </classes>
     </test>
 </suite>
+<!--<div class="login_page" xpath="1">-->
+<!--<h2 class="title heading-secondary">Sign In</h2>-->
+<!--<form class="form-signin">-->
+<!--    <div class="form_item">-->
+<!--        <label for="email" class="label text-primary">Email Address</label>-->
+<!--        <input type="email" id="email" placeholder="Email Address" class="input input-max input_error" value="tests@">-->
+<!--        <p class="err_message">Invalid email address</p>-->
+<!--    </div>-->
+<!--    <div class="form_item">-->
+<!--        <label for="password" class="label text-primary">Password</label>-->
+<!--        <input type="password" id="password" placeholder="Password" class="input input-max input_error" value="">-->
+<!--        <p class="err_message">Required</p>-->
+<!--    </div>-->
+<!--    <div class="bottom_input">-->
+<!--        <p class="err_mess"></p>-->
+<!--        <a class="forgot" href="/password_forgot">Forgot Password?</a>-->
+<!--    </div>-->
+<!--    <div class="form-signin-buttons">-->
+<!--        <button type="submit" class="btn-primary btn-text-primary" disabled="">SIGN IN</button>-->
+<!--    </div>-->
+<!--</form>-->
+</div>

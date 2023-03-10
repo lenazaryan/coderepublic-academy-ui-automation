@@ -4,7 +4,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.academy.automation.helper.Waiter.getWait;
+import static com.academy.automation.helper.Waits.getWait;
 
 public class LoggedInHomePage extends PageBase<LoggedInHomePage> {
 
@@ -40,7 +40,7 @@ public class LoggedInHomePage extends PageBase<LoggedInHomePage> {
     }
 
     public boolean userIconIsDisplayed() {
-        return elementIsDisplayed(userIcon);
+        return isElementDisplayed(userIcon);
     }
 
     public String getUrl() {

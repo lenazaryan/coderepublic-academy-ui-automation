@@ -1,46 +1,39 @@
 package com.academy.automation.tests;
 
 import com.academy.automation.base.TestBase;
+import com.academy.automation.dataprovider.PageData;
 import com.academy.automation.pageobjects.SignInPage;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 public class ForgotPasswordPageTests extends TestBase {
-    @Test(description = "Verify text of Error message with Invalid email ")
-    public void testForgotPasswordLink() {
-        String messageText = new SignInPage()
+
+    @Test(description = "Verify message text with incorrect and correct email ",
+            dataProvider = "correct-incorrect-email-set-for-forgot-password", dataProviderClass = PageData.class)
+    public void testForgotPasswordLink(String email, String expectedMessageText) {
+        String actualMessageText = new SignInPage()
                 .open()
                 .clickForgotPasswordLink()
                 .init()
-                .typeEmail("test@test.com")
+                .typeEmail(email)
                 .clickSendButton()
-                .getErrorMessageText();
-        assertEquals(messageText, "Something went wrong", "Incorrect Error message");
+                .getErrorOrSuccessMessageText();
+        assertEquals(actualMessageText, expectedMessageText, "Incorrect Error/Success message");
     }
 
-    @Test(description = "Verify text of Error message without email")
-    public void verifyErrorMessageText() {
-        String messageText = new SignInPage()
+    @Test(description = "Verify validation error message for email format",
+            dataProvider = "email-format-validation-set-forgot-password", dataProviderClass = PageData.class)
+    public void emailValidationMessageTest(String emailData, String expectedValidationMessage) {
+        String actualValidationMessage = new SignInPage()
                 .open()
                 .clickForgotPasswordLink()
                 .init()
+                .typeEmail(emailData)
                 .clickSendButton()
-                .getErrorMessageText();
-        assertEquals(messageText, "Something went wrong", "Incorrect Error message");
-    }
-
-    @Test(description = "Verify validation message for incorrect format email")
-    public void testIncorrectFormatEmailValidation(){
-        String validationMessage = new SignInPage()
-                .open()
-                .clickForgotPasswordLink()
-                .init()
-                .typeEmail("test")
                 .getValidationMessage();
-        assertEquals(validationMessage,
-                "Please include an '@' in the email address. 'test' is missing an '@'.",
+        assertEquals(actualValidationMessage, expectedValidationMessage,
                 "Incorrect validation message");
     }
+
 }
