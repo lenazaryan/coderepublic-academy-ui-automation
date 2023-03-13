@@ -9,24 +9,28 @@ public class SignInPage extends PageBase<SignInPage> {
     static String PAGE_PATH = "/login";
     @FindBy(css = "#email")
     private WebElement emailField;
-
     @FindBy(css = "#password")
     private WebElement passwordField;
-
     @FindBy(css = ".btn-primary")
     private WebElement submitBtn;
-
     @FindBy(css = ".forgot")
     private WebElement forgotPassword;
-
     @FindBy(css = "#email + p.err_message")
     private WebElement emailErrorMessage;
-
     @FindBy(css = "#password + p.err_message")
     private WebElement passwordErrorMessage;
-
     @FindBy(css = ".err_mess")
     private WebElement incorrectEmailOrPasswordMessage;
+    @FindBy(css = ".user_info-image")
+    private WebElement userInfoImage;
+    @FindBy(css = ".user_info-text")
+    private WebElement userInfoName;
+    @FindBy(css = ".user_profil .text-tertiary.text-tertiary--gray:nth-child(1)")
+    private WebElement userInfoHistory;
+    @FindBy(css = ".user_profil .text-tertiary.text-tertiary--gray:nth-child(2)")
+    private WebElement userInfoLikedVideos;
+    @FindBy(css = ".log_out .text-tertiary .text-tertiary--gray")
+    private WebElement userInfoLogOut;
 
     @Override
     public SignInPage open() {
@@ -81,9 +85,29 @@ public class SignInPage extends PageBase<SignInPage> {
         return passwordErrorMessage.getText();
     }
 
-    public String getErrorTextForIncorrectEmailOrPassword(){
+    public String getErrorTextForIncorrectEmailOrPassword() {
         getWait().waitUntilElementToBeVisible(incorrectEmailOrPasswordMessage);
         return incorrectEmailOrPasswordMessage.getText();
+    }
+
+    public boolean isUserInfoImageDisplayed() {
+        return isElementDisplayed(userInfoImage);
+    }
+
+    public boolean isUserInfoNameDisplayed() {
+        return isElementDisplayed(userInfoName);
+    }
+
+    public boolean isUserInfoHistoryDisplayed() {
+        return isElementDisplayed(userInfoHistory);
+    }
+
+    public boolean isUserInfoLikedVideosDisplayed() {
+        return isElementDisplayed(userInfoLikedVideos);
+    }
+
+    public boolean isUserInfoLogOutDisplayed() {
+        return isElementDisplayed(userInfoLogOut);
     }
 
     public HomePage clickBack() {

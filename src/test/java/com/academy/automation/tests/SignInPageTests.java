@@ -8,9 +8,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
 import static com.academy.automation.configuration.DriverBase.getDriver;
 import static org.testng.Assert.assertEquals;
 
@@ -48,13 +45,22 @@ public class SignInPageTests extends TestBase {
     @Test(description = "Verify login with incorrect email and password",
             dataProvider = "incorrect-email-password-set", dataProviderClass = PageData.class)
     public void testLoginWithIncorrectEmailAndPassword(String email, String password) {
-        String errorMessageText = new SignInPage()
+        SignInPage page = new SignInPage()
+                .open();
+
+        String errorMessageText = page
                 .open()
                 .typeEmail(email)
                 .typePassword(password)
                 .clickSignInButton()
                 .getErrorTextForIncorrectEmailOrPassword();
-        assertEquals(errorMessageText, "Incorrect email or password", "Incorrect error message");
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(page.isIncorrectEmailOrPassErrorDisplayed(),
+                "'Incorrect Email or Password' Error should be displayed, but it is not");
+        softAssert.assertEquals(errorMessageText,
+                "Incorrect email or password", "Error message is incorrect");
+        softAssert.assertAll();
     }
 
     @Test(description = "Verify password masking")
@@ -72,6 +78,5 @@ public class SignInPageTests extends TestBase {
                 .getScreenshotAs(OutputType.BASE64);
         assertEquals(screenshotOfFirstPassword, screenshotOfSecondPassword, "Screenshots are Different");
     }
-
 
 }
